@@ -1,68 +1,22 @@
 package uk.gov.hmcts.reform.npa;
 
 import org.apache.pdfbox.cos.COSDictionary;
-import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageTree;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationPopup;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationTextMarkup;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAppearanceDictionary;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
-import static uk.gov.hmcts.reform.npa.Utils.colourBlue;
 import static uk.gov.hmcts.reform.npa.Utils.setAuthorAndDate;
 
-
+@Component
 public class AnnotateCommentBox {
-    static final float INCH = 72;
-    private PDPageTree pages;
-    private List newAnnotations = new ArrayList();
 
-    private float pw;
-    private float ph;
-
-    public void generateAnnotation() throws IOException {
-        File file = new File("stickyNotePdf_2.pdf");
-
-        PDDocument document = PDDocument.load(file);
-
-        pages = document.getDocumentCatalog().getPages();
-        PDPage page = pages.get(0);
-
-        pw = page.getMediaBox().getUpperRightX();
-        ph = page.getMediaBox().getUpperRightY();
-        List<PDAnnotation> annotations = page.getAnnotations();
-
-
-        for (PDAnnotation pdAnnotation: annotations) {
-            COSDictionary dictionary = pdAnnotation.getCOSObject();
-            System.out.println("<<<<<<<<<<<<<<<<<NEW ANNO>>>>>>>>>>>>>\n" +
-                dictionary +
-                "\n" + pdAnnotation.getSubtype() +
-                "\n" + dictionary.getString("Contents") +
-                "\n" + dictionary.getItem(COSName.RECT)+
-                "\n" + dictionary.getItem(COSName.QUADPOINTS));
-
-            addCommentIconAnnotation(pdAnnotation);
-        }
-//////////////////////////////////////////////////////////////////////////////////////
-
-        page.setAnnotations(newAnnotations);
-        document.save("my_doc.pdf");
-        document.close();
-    }
-
-    public static List<PDAnnotation> addCommentIconAnnotation(PDAnnotation annotation) {
+    public List<PDAnnotation> addCommentIconAnnotation(PDAnnotation annotation) {
 
         float pw = annotation.getPage().getMediaBox().getUpperRightX();
         float ph = annotation.getPage().getMediaBox().getUpperRightY();

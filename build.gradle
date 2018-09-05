@@ -57,7 +57,7 @@ def versions = [
 ]
 
 dependencies {
-    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: ${versions.pdfbox}
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.11'
     compile("io.springfox:springfox-swagger2:${versions.springfoxSwagger}")
     compile("io.springfox:springfox-swagger-ui:${versions.springfoxSwagger}")
     compile("org.springframework.boot:spring-boot-starter-web")

@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 public class Utils {
 
+    static final float INCH = 72;
     static PDColor colourRed = new PDColor(new float[]{1,0,0}, PDDeviceRGB.INSTANCE);
     static PDColor colourBlue = new PDColor(new float[]{0,0,1}, PDDeviceRGB.INSTANCE);
     static PDColor colourBlack = new PDColor(new float[]{0,0,0}, PDDeviceRGB.INSTANCE);
@@ -38,7 +39,7 @@ public class Utils {
 
     public static void writeAnnotationsToPdf(PDDocument document) {
         try {
-            document.save("my_doc.pdf");
+            document.save("generatedPdf.pdf");
             document.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,6 +49,5 @@ public class Utils {
     public static void setAuthorAndDate(PDAnnotationMarkup annotationMarkup) {
         annotationMarkup.setTitlePopup("Phillip Denness");
         annotationMarkup.setCreationDate(Calendar.getInstance());
-
     }
  }

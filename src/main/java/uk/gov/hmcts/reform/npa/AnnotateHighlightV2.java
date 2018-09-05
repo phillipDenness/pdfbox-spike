@@ -1,18 +1,16 @@
 package uk.gov.hmcts.reform.npa;
 
-import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationTextMarkup;
-
-import java.util.Calendar;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 import static uk.gov.hmcts.reform.npa.Utils.setAuthorAndDate;
 
+@Component
 public class AnnotateHighlightV2 {
 
-    public static PDAnnotationTextMarkup addHighlightAnnotation(PDAnnotation annotation) {
+    public PDAnnotationTextMarkup addHighlightAnnotation(PDAnnotation annotation) {
 
         if (annotation.getSubtype().equalsIgnoreCase("Highlight")) {
             PDAnnotationTextMarkup annotationHighlightMarkup = new PDAnnotationTextMarkup(annotation.getCOSObject());
